@@ -23,7 +23,7 @@ export const sendInquiry = createServerFn({ method: "POST" })
     const origin =
       request.headers.get("origin") ||
       request.headers.get("referer")?.replace(/\/$/, "") ||
-      "https://profile-eight-alpha-72.vercel.app";
+      "https://ksangki.vercel.app";
 
     const response = await fetch(`https://formsubmit.co/ajax/${CONTACT_TO}`, {
       method: "POST",
