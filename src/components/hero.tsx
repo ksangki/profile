@@ -13,8 +13,7 @@ export function Hero() {
       aria-labelledby="hero-name"
     >
       <Shell className="grid min-h-[calc(100svh-4.25rem)] grid-rows-[auto_1fr_auto] py-8 pb-24 sm:py-10 md:pb-12">
-        <div className="flex items-center justify-between gap-4 text-xs font-medium tracking-wide text-muted">
-          <p>{copy.site.location} · {copy.site.team}</p>
+        <div className="flex items-center text-xs font-medium tracking-wide text-muted">
           <p>{copy.hero.kicker}</p>
         </div>
 

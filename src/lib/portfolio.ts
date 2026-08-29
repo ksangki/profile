@@ -30,10 +30,8 @@ export type Copy = {
     name: string;
     otherName: string;
     role: string;
-    location: string;
     availability: string;
     years: string;
-    team: string;
   };
   links: { label: string; href: string }[];
   nav: NavLink[];
@@ -215,10 +213,8 @@ const ko: Copy = {
     name: "김상기",
     otherName: "Sangki Kim",
     role: "SK텔레콤 Developer Relations Manager",
-    location: "서울",
     availability: "강연 · 협업 · 미디어 문의",
     years: "2006—2026",
-    team: "기업문화AX팀",
   },
   links: [
     { label: "LinkedIn", href: SHARED_LINKS[0].href },
@@ -250,7 +246,7 @@ const ko: Copy = {
     kicker: "소개",
     portrait: "/images/portrait.jpg",
     portraitAlt: "트레이싱지 도면과 제도 도구가 놓인 작업 책상.",
-    caption: "작업실, 서울",
+    caption: "작업실",
     lede: "코드 너머, 회사보다 오래 남을 개발자.",
     pull: "회사보다 오래 남을 개발자를 키웁니다.",
     paragraphs: [
@@ -677,10 +673,8 @@ const en: Copy = {
     name: "Sangki Kim",
     otherName: "김상기",
     role: "SK Telecom Developer Relations Manager",
-    location: "Seoul",
     availability: "Talks · collaboration · press",
     years: "2006—2026",
-    team: "Corporate Culture AX Team",
   },
   links: [
     { label: "LinkedIn", href: SHARED_LINKS[0].href },
@@ -712,7 +706,7 @@ const en: Copy = {
     kicker: "Profile",
     portrait: "/images/portrait.jpg",
     portraitAlt: "A work desk with tracing-paper diagrams and drafting tools.",
-    caption: "Studio, Seoul",
+    caption: "Studio",
     lede: "Beyond code — developers who last longer than any company.",
     pull: "I grow developers who outlast the company they work for.",
     paragraphs: [

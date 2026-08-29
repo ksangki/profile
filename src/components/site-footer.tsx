@@ -10,8 +10,6 @@ export function SiteFooter() {
         <p className="font-display text-section leading-tight tracking-display">{copy.site.name}</p>
         <p className="mt-3 font-display text-lede text-paper/70">
           {copy.site.role}
-          <span className="mx-2 text-paper/40">·</span>
-          {copy.site.location}
         </p>
 
         <div className="mt-12 grid gap-10 border-t border-paper/15 pt-10 sm:grid-cols-2 lg:grid-cols-3">

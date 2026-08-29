@@ -85,11 +85,7 @@ export function Contact() {
             <dl className="mt-10 space-y-4 text-sm">
               <div className="flex justify-between gap-4 border-b border-border pb-3">
                 <dt className="text-muted">{contact.workLabel}</dt>
-                <dd className="text-right text-ink">
-                  {copy.site.role}
-                  <br />
-                  {copy.site.team}
-                </dd>
+                <dd className="text-right text-ink">{copy.site.role}</dd>
               </div>
               <div className="flex justify-between gap-4 border-b border-border pb-3">
                 <dt className="text-muted">{contact.profileLabel}</dt>
