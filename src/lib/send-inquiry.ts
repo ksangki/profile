@@ -1,4 +1,4 @@
-const CONTACT_TO = "ksangki@gmail.com";
+const FORM_ID = "21493474d0e0068fd98978c437e13d95";
 
 export type InquiryInput = {
   name: string;
@@ -24,7 +24,7 @@ export async function sendInquiry(data: InquiryInput) {
   body.set("_captcha", "false");
   body.set("_honey", "");
 
-  const response = await fetch(`https://formsubmit.co/ajax/${CONTACT_TO}`, {
+  const response = await fetch(`https://formsubmit.co/ajax/${FORM_ID}`, {
     method: "POST",
     headers: { Accept: "application/json" },
     body,
