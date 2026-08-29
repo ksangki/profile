@@ -1,0 +1,5 @@
+screenshots
+artifacts
+*.log
+scripts/*.test.mjs
+src/**/*.test.ts
