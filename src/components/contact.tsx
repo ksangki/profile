@@ -63,7 +63,7 @@ export function Contact() {
     setSendError(null);
     setStatus("sending");
     try {
-      await sendInquiry({ data: parsed.data });
+      await sendInquiry(parsed.data);
       setStatus("sent");
     } catch {
       setStatus("idle");
