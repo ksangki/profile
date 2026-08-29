@@ -1,4 +1,4 @@
-const FORM_ID = "21493474d0e0068fd98978c437e13d95";
+const ACCESS_KEY = "10b308fa-a850-4a38-9a7c-bcb92b9d9f5b";
 
 export type InquiryInput = {
   name: string;
@@ -13,33 +13,31 @@ export async function sendInquiry(data: InquiryInput) {
     return { ok: true as const };
   }
 
-  const body = new FormData();
-  body.set("name", data.name);
-  body.set("email", data.email);
-  body.set("kind", data.kind);
-  body.set("message", data.message);
-  body.set("_replyto", data.email);
-  body.set("_subject", `홈페이지 문의 · ${data.kind} · ${data.name}`);
-  body.set("_template", "table");
-  body.set("_captcha", "false");
-  body.set("_honey", "");
-
-  const response = await fetch(`https://formsubmit.co/ajax/${FORM_ID}`, {
+  const response = await fetch("https://api.web3forms.com/submit", {
     method: "POST",
-    headers: { Accept: "application/json" },
-    body,
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      access_key: ACCESS_KEY,
+      name: data.name,
+      email: data.email,
+      kind: data.kind,
+      message: data.message,
+      subject: `홈페이지 문의 · ${data.kind} · ${data.name}`,
+      from_name: data.name,
+      replyto: data.email,
+    }),
     signal: AbortSignal.timeout(15000),
   });
 
   const payload = (await response.json().catch(() => null)) as {
-    success?: string | boolean;
+    success?: boolean;
     message?: string;
   } | null;
 
-  const ok = payload?.success === true || payload?.success === "true";
-  const activating = (payload?.message ?? "").toLowerCase().includes("activation");
-
-  if (!ok && !activating) {
+  if (!payload?.success) {
     throw new Error(payload?.message || "Mail could not be sent.");
   }
 
