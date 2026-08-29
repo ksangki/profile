@@ -128,7 +128,7 @@ export type Copy = {
     writeAnother: string;
     inquiryAria: string;
     inquiryKinds: [string, string, string, string];
-    errors: { name: string; email: string; message: string };
+    errors: { name: string; email: string; message: string; send: string };
   };
   footer: { typeCredit: string; pdf: string };
 };
@@ -511,6 +511,7 @@ const ko: Copy = {
       name: "이름을 적어 주세요.",
       email: "이메일 형식을 확인해 주세요.",
       message: "조금만 더 구체적으로 적어 주세요.",
+      send: "보내지 못했습니다. 잠시 후 다시 시도하거나 LinkedIn으로 연락해 주세요.",
     },
   },
   footer: {
@@ -890,6 +891,7 @@ const en: Copy = {
       name: "Please add your name.",
       email: "Please check the email address.",
       message: "A little more detail, please.",
+      send: "Could not send. Try again in a moment, or reach out on LinkedIn.",
     },
   },
   footer: {

@@ -8,12 +8,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { SectionHeading } from "@/components/section-heading";
 import { Shell } from "@/components/shell";
 import { useCopy } from "@/lib/locale";
+import { sendInquiry } from "@/lib/send-inquiry";
 
 type FormState = {
   name: string;
   email: string;
   kind: string;
   message: string;
+  website: string;
 };
 
 export function Contact() {
@@ -24,9 +26,11 @@ export function Contact() {
     email: "",
     kind: contact.inquiryKinds[0],
     message: "",
+    website: "",
   };
   const [form, setForm] = useState<FormState>(empty);
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
+  const [sendError, setSendError] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
 
   const schema = useMemo(
@@ -36,6 +40,7 @@ export function Contact() {
         email: z.string().trim().email(contact.errors.email),
         kind: z.enum(contact.inquiryKinds),
         message: z.string().trim().min(16, contact.errors.message),
+        website: z.string(),
       }),
     [contact],
   );
@@ -55,9 +60,15 @@ export function Contact() {
       return;
     }
     setErrors({});
+    setSendError(null);
     setStatus("sending");
-    await new Promise((resolve) => setTimeout(resolve, 700));
-    setStatus("sent");
+    try {
+      await sendInquiry({ data: parsed.data });
+      setStatus("sent");
+    } catch {
+      setStatus("idle");
+      setSendError(contact.errors.send);
+    }
   }
 
   return (
@@ -214,7 +225,23 @@ export function Contact() {
                     {errors.message}
                   </p>
                 ) : null}
+                <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+                  <label htmlFor="contact-website">website</label>
+                  <input
+                    id="contact-website"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={form.website}
+                    onChange={(event) => setForm((prev) => ({ ...prev, website: event.target.value }))}
+                  />
+                </div>
               </div>
+              {sendError ? (
+                <p className="px-5 pb-2 text-sm text-sage sm:px-7" role="alert">
+                  {sendError}
+                </p>
+              ) : null}
               <div className="flex justify-end px-5 py-5 sm:px-7">
                 <Button type="submit" disabled={status === "sending"}>
                   {status === "sending" ? contact.sending : contact.send}
