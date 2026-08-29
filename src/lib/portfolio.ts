@@ -238,7 +238,7 @@ const ko: Copy = {
     stats: [
       { value: "약 20년", label: "개발 · QA · 프로세스" },
       { value: "20,000+", label: "DEVOCEAN 커뮤니티" },
-      { value: "500+", label: "LinkedIn 팔로워" },
+      { value: "3,000+", label: "LinkedIn 팔로워" },
     ],
   },
   about: {
@@ -698,7 +698,7 @@ const en: Copy = {
     stats: [
       { value: "~20 yrs", label: "Engineering · QA · process" },
       { value: "20,000+", label: "DEVOCEAN community" },
-      { value: "500+", label: "LinkedIn followers" },
+      { value: "3,000+", label: "LinkedIn followers" },
     ],
   },
   about: {
