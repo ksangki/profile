@@ -1,0 +1,196 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #f4f0e8;
+  --color-ink: #1a1814;
+  --color-muted: #6a645c;
+  --color-surface: #e8e2d6;
+  --color-sage: #4a5348;
+  --color-border: color-mix(in oklab, var(--color-ink) 12%, transparent);
+  --color-border-strong: color-mix(in oklab, var(--color-ink) 22%, transparent);
+
+  --font-display: "Noto Serif KR", "Instrument Serif", "Iowan Old Style", Palatino, serif;
+  --font-sans: "Noto Sans KR", "Figtree", "Segoe UI", system-ui, sans-serif;
+
+  --text-display: clamp(2.5rem, 6.2vw, 5.25rem);
+  --text-section: clamp(2.25rem, 5vw, 4.25rem);
+  --text-lede: clamp(1.25rem, 2.2vw, 1.75rem);
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.1875rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --text-3xl: 2.75rem;
+
+  --leading-tight: 0.95;
+  --leading-snug: 1.25;
+  --leading-normal: 1.65;
+  --leading-relaxed: 1.75;
+
+  --tracking-display: -0.02em;
+  --tracking-tight: -0.01em;
+  --tracking-wide: 0.12em;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  --aspect-photo: 4 / 3;
+  --aspect-portrait: 4 / 3;
+
+  --shadow-border:
+    0 0 0 1px color-mix(in oklab, var(--color-ink) 8%, transparent),
+    0 1px 2px -1px color-mix(in oklab, var(--color-ink) 6%, transparent),
+    0 2px 8px 0 color-mix(in oklab, var(--color-ink) 4%, transparent);
+  --shadow-border-hover:
+    0 0 0 1px color-mix(in oklab, var(--color-ink) 14%, transparent),
+    0 8px 24px -8px color-mix(in oklab, var(--color-ink) 16%, transparent);
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-smooth-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-micro: 80ms;
+  --motion-quick: 150ms;
+  --motion-fast: 250ms;
+  --motion-slow: 400ms;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  html[lang="en"] {
+    word-break: normal;
+    --font-display: "Instrument Serif", "Noto Serif KR", "Iowan Old Style", Palatino, serif;
+    --font-sans: "Figtree", "Noto Sans KR", "Segoe UI", system-ui, sans-serif;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+    word-break: keep-all;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  img {
+    outline: 1px solid color-mix(in oklab, var(--color-ink) 10%, transparent);
+    outline-offset: -1px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.stagger-in > * {
+  animation: rise-in var(--motion-slow) var(--ease-smooth-out) both;
+}
+
+.stagger-in > *:nth-child(1) {
+  animation-delay: 40ms;
+}
+.stagger-in > *:nth-child(2) {
+  animation-delay: 120ms;
+}
+.stagger-in > *:nth-child(3) {
+  animation-delay: 200ms;
+}
+.stagger-in > *:nth-child(4) {
+  animation-delay: 280ms;
+}
+
+.grain::after {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  opacity: 0.035;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.project-card img {
+  transform: scale(1);
+  transition: transform var(--motion-slow) var(--ease-smooth-out);
+}
+
+.project-overlay {
+  opacity: 0;
+  background-color: color-mix(in oklab, var(--color-ink) 0%, transparent);
+  transition:
+    opacity var(--motion-fast) var(--ease-out),
+    background-color var(--motion-fast) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover img,
+  .project-card:focus-visible img {
+    transform: scale(1.04);
+  }
+
+  .project-card:hover .project-overlay,
+  .project-card:focus-visible .project-overlay {
+    opacity: 1;
+    background-color: color-mix(in oklab, var(--color-ink) 72%, transparent);
+  }
+}
+
+.project-card:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 4px;
+}
