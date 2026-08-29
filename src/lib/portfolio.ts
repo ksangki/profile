@@ -92,6 +92,11 @@ export type Copy = {
     bookCta: string;
     pressHeading: string;
     platformsHeading: string;
+    ebooksHeading: string;
+    ebooksKicker: string;
+    ebooksLede: string;
+    readLabel: string;
+    epubLabel: string;
     book: {
       title: string;
       press: string;
@@ -101,6 +106,17 @@ export type Copy = {
       alt: string;
       body: string;
     };
+    ebookSeries: {
+      heading: string;
+      books: {
+        title: string;
+        subtitle: string;
+        href: string;
+        epub: string;
+        note?: string;
+        extras?: { label: string; href: string }[];
+      }[];
+    }[];
     press: { outlet: string; date: string; title: string; href: string }[];
     platforms: { name: string; detail: string; href: string }[];
   };
@@ -139,6 +155,47 @@ const SHARED_LINKS = [
   { href: "https://devocean.sk.com/" },
   { href: "https://www.yes24.com/product/goods/148184184" },
 ] as const;
+
+const EBOOKS = {
+  era: {
+    href: "https://ksangki.github.io/beyond-code-era/",
+    epub: "https://ksangki.github.io/beyond-code-era/epub/코드-너머의-시대-v1.0.0.epub",
+  },
+  jobs: {
+    href: "https://ksangki.github.io/beyond-code-jobs/",
+    epub: "https://ksangki.github.io/beyond-code-jobs/epub/코드-너머의-직업들-v1.1.1.epub",
+  },
+  org: {
+    href: "https://ksangki.github.io/beyond-code-org/",
+    epub: "https://ksangki.github.io/beyond-code-org/epub/코드-너머의-조직-v1.2.0.epub",
+  },
+  summary: {
+    href: "https://ksangki.github.io/beyond-code-summary/",
+    epub: "https://ksangki.github.io/beyond-code-summary/epub/코드-너머의-시리즈-v1.1.0.epub",
+  },
+  ax: {
+    href: "https://ksangki.github.io/ax-book/",
+    epub: "https://ksangki.github.io/ax-book/epub/AX를-만들다-v1.2.0.epub",
+  },
+  maturity: {
+    href: "https://ksangki.github.io/ax-maturity/",
+    epub: "https://ksangki.github.io/ax-maturity/epub/나는-이-게임을-안다-v1.0.0.epub",
+    check: "https://axmm-check.vercel.app",
+    slides: "https://ksangki.github.io/ax-maturity/presentation/",
+  },
+  ontology: {
+    href: "https://ksangki.github.io/ontology-neo4j-ai/",
+    epub: "https://ksangki.github.io/ontology-neo4j-ai/epub/온톨로지-실전-입문-v1.0.0.epub",
+  },
+  website: {
+    href: "https://ksangki.github.io/claude-static-site-handson/",
+    epub: "https://ksangki.github.io/claude-static-site-handson/epub/따라-하면-완성되는-내-첫-웹사이트-v1.0.0.epub",
+  },
+  claude: {
+    href: "https://ksangki.github.io/claude-practical-guide/",
+    epub: "https://ksangki.github.io/claude-practical-guide/epub/일잘러의-Claude-활용법-v1.0.0.epub",
+  },
+} as const;
 
 const ko: Copy = {
   meta: {
@@ -383,10 +440,16 @@ const ko: Copy = {
   },
   writing: {
     heading: "저술 & 미디어",
-    kicker: "한빛미디어 · 2025",
+    kicker: "한빛미디어 · e-book · 2025–2026",
     bookCta: "도서 정보 보기",
     pressHeading: "언론 보도",
     platformsHeading: "활동 플랫폼",
+    ebooksHeading: "지은 책",
+    ebooksKicker: "e-book · 2026",
+    ebooksLede:
+      "AI가 일하는 방식을 바꾸는 동안, 그 변화를 안에서 겪으며 쓴 기록들. 모두 웹에서 바로 읽을 수 있고 EPUB으로 내려받을 수 있습니다.",
+    readLabel: "읽기",
+    epubLabel: "EPUB",
     book: {
       title: "코드 너머, 회사보다 오래 남을 개발자",
       press: "한빛미디어",
@@ -396,6 +459,82 @@ const ko: Copy = {
       alt: "크림색 종이 위의 클로스바운드 책과 만년필.",
       body: "소프트 스킬, 개발 문화, 퍼스널 브랜딩을 통해 개발자가 장기적으로 경쟁력을 갖출 수 있는 방법을 제시합니다. 단순한 기술 전문성을 넘어 「코드 너머」의 가치를 탐구하며, 회사보다 오래 남을 수 있는 개발자가 되기 위한 실질적인 조언과 인사이트를 담고 있습니다.",
     },
+    ebookSeries: [
+      {
+        heading: "코드 너머 시리즈",
+        books: [
+          {
+            title: "코드 너머의 시대",
+            subtitle: "AI가 모든 것을 바꾼 세상에서 살아남는 법",
+            href: EBOOKS.era.href,
+            epub: EBOOKS.era.epub,
+          },
+          {
+            title: "코드 너머의 직업들",
+            subtitle: "GPU 위에서 일하는 사람들",
+            href: EBOOKS.jobs.href,
+            epub: EBOOKS.jobs.epub,
+          },
+          {
+            title: "코드 너머의 조직",
+            subtitle: "AX 시대, 일과 조직을 다시 짜는 법",
+            href: EBOOKS.org.href,
+            epub: EBOOKS.org.epub,
+          },
+          {
+            title: "코드 너머의 시리즈",
+            subtitle: "세 권의 결을 한 권에",
+            href: EBOOKS.summary.href,
+            epub: EBOOKS.summary.epub,
+          },
+        ],
+      },
+      {
+        heading: "AX 실전",
+        books: [
+          {
+            title: "AX를 만들다",
+            subtitle: "일하는 방식을 코드로 다시 짠 6개월의 기록",
+            href: EBOOKS.ax.href,
+            epub: EBOOKS.ax.epub,
+          },
+          {
+            title: "나는 이 게임을 안다",
+            subtitle: "AX 성숙도를 스스로 재는 법",
+            href: EBOOKS.maturity.href,
+            epub: EBOOKS.maturity.epub,
+            note: "로그인 없이 15분이면 우리 조직이 몇 단계인지 재볼 수 있습니다.",
+            extras: [
+              { label: "자체 점검 30문항", href: EBOOKS.maturity.check },
+              { label: "발표 슬라이드", href: EBOOKS.maturity.slides },
+            ],
+          },
+        ],
+      },
+      {
+        heading: "기술 실습",
+        books: [
+          {
+            title: "온톨로지 실전 입문",
+            subtitle: "Neo4j와 AI로 지식그래프 시스템 만들기",
+            href: EBOOKS.ontology.href,
+            epub: EBOOKS.ontology.epub,
+          },
+          {
+            title: "따라 하면 완성되는 내 첫 웹사이트",
+            subtitle: "비개발자를 위한 Claude AI 실습 가이드",
+            href: EBOOKS.website.href,
+            epub: EBOOKS.website.epub,
+          },
+          {
+            title: "일잘러의 Claude 활용법",
+            subtitle: "AI로 일하는 방식이 달라진다",
+            href: EBOOKS.claude.href,
+            epub: EBOOKS.claude.epub,
+          },
+        ],
+      },
+    ],
     press: [
       {
         outlet: "CIO Korea",
@@ -763,10 +902,16 @@ const en: Copy = {
   },
   writing: {
     heading: "Writing & press",
-    kicker: "Hanbit Media · 2025",
+    kicker: "Hanbit Media · e-book · 2025–2026",
     bookCta: "View the book",
     pressHeading: "Press",
     platformsHeading: "Where I write",
+    ebooksHeading: "Books",
+    ebooksKicker: "e-book · 2026",
+    ebooksLede:
+      "Notes written from inside the shift, while AI was changing how we work. Each can be read on the web or downloaded as EPUB.",
+    readLabel: "Read",
+    epubLabel: "EPUB",
     book: {
       title: "Beyond Code: The Developer Who Lasts Longer Than the Company",
       press: "Hanbit Media",
@@ -776,6 +921,82 @@ const en: Copy = {
       alt: "A clothbound book and a fountain pen on cream paper.",
       body: "The book shows how soft skills, engineering culture, and personal branding help a developer stay competitive over a whole career. It looks past technical expertise to the value of going “beyond code,” with practical advice for becoming someone who outlasts any one company.",
     },
+    ebookSeries: [
+      {
+        heading: "Beyond Code series",
+        books: [
+          {
+            title: "Beyond the Code Era",
+            subtitle: "How to last in a world AI has rewritten",
+            href: EBOOKS.era.href,
+            epub: EBOOKS.era.epub,
+          },
+          {
+            title: "Beyond the Code Jobs",
+            subtitle: "People who work on GPUs",
+            href: EBOOKS.jobs.href,
+            epub: EBOOKS.jobs.epub,
+          },
+          {
+            title: "Beyond the Code Organization",
+            subtitle: "How to rebuild work and teams in the AX era",
+            href: EBOOKS.org.href,
+            epub: EBOOKS.org.epub,
+          },
+          {
+            title: "Beyond the Code Series",
+            subtitle: "Three books, one grain",
+            href: EBOOKS.summary.href,
+            epub: EBOOKS.summary.epub,
+          },
+        ],
+      },
+      {
+        heading: "AX in practice",
+        books: [
+          {
+            title: "Building AX",
+            subtitle: "Six months of rewriting how we work, in code",
+            href: EBOOKS.ax.href,
+            epub: EBOOKS.ax.epub,
+          },
+          {
+            title: "I Know This Game",
+            subtitle: "How to measure your own AX maturity",
+            href: EBOOKS.maturity.href,
+            epub: EBOOKS.maturity.epub,
+            note: "Fifteen minutes, no login — see what stage your organization is at.",
+            extras: [
+              { label: "30-question check", href: EBOOKS.maturity.check },
+              { label: "Slides", href: EBOOKS.maturity.slides },
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Hands-on",
+        books: [
+          {
+            title: "Ontology in Practice",
+            subtitle: "Building a knowledge-graph system with Neo4j and AI",
+            href: EBOOKS.ontology.href,
+            epub: EBOOKS.ontology.epub,
+          },
+          {
+            title: "Your First Website, Step by Step",
+            subtitle: "A Claude AI workshop for non-developers",
+            href: EBOOKS.website.href,
+            epub: EBOOKS.website.epub,
+          },
+          {
+            title: "Claude for People Who Get Things Done",
+            subtitle: "How AI changes the way you work",
+            href: EBOOKS.claude.href,
+            epub: EBOOKS.claude.epub,
+          },
+        ],
+      },
+    ],
     press: [
       {
         outlet: "CIO Korea",

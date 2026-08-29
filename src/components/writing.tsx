@@ -45,6 +45,68 @@ export function Writing() {
         </article>
 
         <div className="mt-16 border-t border-border pt-12">
+          <p className="text-xs font-medium tracking-wider text-muted">{writing.ebooksKicker}</p>
+          <h3 className="mt-3 font-display text-2xl tracking-tight text-ink">{writing.ebooksHeading}</h3>
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted">{writing.ebooksLede}</p>
+
+          <div className="mt-10 space-y-12">
+            {writing.ebookSeries.map((series) => (
+              <div key={series.heading}>
+                <h4 className="text-xs font-medium tracking-wider text-muted">{series.heading}</h4>
+                <ul className="mt-4">
+                  {series.books.map((book) => (
+                    <li key={book.href} className="border-b border-border py-5">
+                      <a
+                        href={book.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="group block min-h-11"
+                      >
+                        <span className="font-display text-xl leading-snug text-ink underline-offset-4 group-hover:underline">
+                          {book.title}
+                        </span>
+                        <span className="mt-1 block text-sm leading-relaxed text-muted">{book.subtitle}</span>
+                      </a>
+                      {book.note ? (
+                        <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted">{book.note}</p>
+                      ) : null}
+                      <p className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-sm">
+                        <a
+                          href={book.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-ink underline-offset-4 hover:underline"
+                        >
+                          {writing.readLabel}
+                        </a>
+                        <a
+                          href={book.epub}
+                          download
+                          className="text-ink underline-offset-4 hover:underline"
+                        >
+                          {writing.epubLabel}
+                        </a>
+                        {book.extras?.map((extra) => (
+                          <a
+                            key={extra.href}
+                            href={extra.href}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-ink underline-offset-4 hover:underline"
+                          >
+                            {extra.label}
+                          </a>
+                        ))}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-16 border-t border-border pt-12">
           <h3 className="font-display text-2xl tracking-tight text-ink">{writing.pressHeading}</h3>
           <ul className="mt-6">
             {writing.press.map((item) => (
